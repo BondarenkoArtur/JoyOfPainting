@@ -78,6 +78,15 @@ class JopApp {
         // Title/Author validation
         this.titleInput.addEventListener('input', () => this.validateTitleAuthor());
         this.authorInput.addEventListener('input', () => this.validateTitleAuthor());
+        
+        // Recalculate grid on window resize
+        window.addEventListener('resize', () => {
+            if (this.currentImage) {
+                const width = parseInt(this.gridWidth.value);
+                const height = parseInt(this.gridHeight.value);
+                this.updateGridPreview(width, height);
+            }
+        });
     }
 
     validateTitleAuthor() {
@@ -197,6 +206,7 @@ class JopApp {
                 this.outputFormatSelect.value = 'paint';
                 
                 this.metadataEditor.style.display = 'block';
+                this.updateMultiCanvasInfo(); // Initialize grid preview
                 resolve();
             };
             img.onerror = () => reject(new Error('Failed to load image'));
@@ -237,7 +247,22 @@ class JopApp {
     }
 
     updateGridPreview(width, height) {
-        this.gridContainer.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
+        const canvasType = parseInt(this.multiCanvasType.value);
+        const canvasInfo = JopConverter.CANVAS_TYPES[canvasType];
+        
+        // Get available width from container, max height is min of 1.2x width or 70% viewport height
+        const containerWidth = this.gridContainer.parentElement.clientWidth - 40; // padding
+        const maxHeight = Math.min(containerWidth * 1.2, window.innerHeight * 0.7);
+        
+        const totalWidth = canvasInfo.width * width;
+        const totalHeight = canvasInfo.height * height;
+        const scale = Math.min(containerWidth / totalWidth, maxHeight / totalHeight);
+        
+        const cellWidth = Math.floor(canvasInfo.width * scale);
+        const cellHeight = Math.floor(canvasInfo.height * scale);
+        
+        this.gridContainer.style.gridTemplateColumns = `repeat(${width}, ${cellWidth}px)`;
+        this.gridContainer.style.gridTemplateRows = `repeat(${height}, ${cellHeight}px)`;
         this.gridContainer.innerHTML = '';
         
         if (this.currentImage) {

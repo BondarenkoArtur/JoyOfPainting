@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(270deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     color: #333;
 }
@@ -20,6 +20,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 40px;
+    margin-top: 40px;
     color: white;
 }
 
@@ -187,6 +188,9 @@ header p {
     padding: 20px;
     border-radius: 8px;
     border: 1px solid #e9ecef;
+    word-wrap: anywhere;
+    overflow-wrap: anywhere;
+    min-width: 0;
 }
 
 .preview-info h3 {
@@ -259,11 +263,12 @@ header p {
 .grid-container {
     display: grid;
     gap: 1px;
-    max-width: 400px;
     margin: 0 auto;
     background: #dee2e6;
     padding: 5px;
     border-radius: 4px;
+    width: fit-content;
+    height: fit-content;
 }
 
 .grid-cell {
@@ -274,7 +279,7 @@ header p {
     justify-content: center;
     font-size: 10px;
     color: #6c757d;
-    min-height: 30px;
+    min-height: 20px;
     position: relative;
     overflow: hidden;
 }
@@ -291,5 +296,124 @@ header p {
 @media (max-width: 768px) {
     .grid-controls {
         grid-template-columns: 1fr;
+    }
+}
+.usage-guide {
+    background: #f8f9fa;
+    padding: 40px 0;
+    margin-top: 40px;
+}
+
+.usage-guide h2 {
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.guide-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.guide-section h3 {
+    color: #495057;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.guide-section h4 {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.command-box {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+    color: #1565c0;
+}
+
+.command-box p {
+    color: #1565c0;
+    margin: 5px 0;
+}
+
+.command-box code {
+    background: #1976d2 !important;
+    color: white !important;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    border: none !important;
+}
+
+.workflow {
+    background: #f1f8e9;
+    border-left: 4px solid #4caf50;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.workflow ol {
+    margin: 10px 0 0 20px;
+}
+
+.workflow li {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.guide-section ul {
+    margin: 15px 0 0 20px;
+}
+
+.guide-section li {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.guide-section code {
+    background: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    border: 1px solid #e9ecef;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .converter-section, .preview-section, .multi-canvas-section {
+        padding: 20px;
+    }
+    
+    .preview-container {
+        flex-direction: column;
+    }
+    
+    .grid-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .usage-guide {
+        padding: 20px 0;
+    }
+    
+    .guide-section {
+        padding: 20px;
+        margin-bottom: 20px;
     }
 }
