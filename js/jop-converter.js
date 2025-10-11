@@ -242,9 +242,10 @@ class JopConverter {
                 paintData.version = version;
                 
                 // Generate unique name for each canvas part
+                const baseTimestamp = Math.floor(Date.now() / 1000);
+                const uniqueId = baseTimestamp + (row * gridWidth + col); // Add position offset to timestamp
                 const baseName = paintData.name.split('_')[0]; // Get UUID part
-                const timestamp = Math.floor(Date.now() / 1000);
-                paintData.name = `${baseName}_${timestamp}_${row}_${col}`;
+                paintData.name = `${baseName}_${uniqueId}`;
                 
                 const filename = title ? `${title}_${row + 1}_${col + 1}.paint` : `canvas_${row + 1}_${col + 1}.paint`;
                 
